@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/core/utils/colors.dart' as color;
-
-import '../../../../../core/utils/constatnt.dart';
+import 'package:smart/features/freelancer/data/model/one_freelancer_model.dart';
 
 class FreelancerDetailsTable extends StatelessWidget {
-  const FreelancerDetailsTable({super.key});
+  const FreelancerDetailsTable({super.key, required this.oneFreelancerModel});
+  final OneFreelancerModel oneFreelancerModel;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           label: Text(
                         "Serial Number",
                         overflow: TextOverflow.ellipsis,
-                        style: appStyle(
-                            14, color.Colors.blueColor, FontWeight.w500),
+                        style: appStyle(context, 14, color.Colors.blueColor,
+                            FontWeight.w500),
                       )),
                       DataColumn(
                           label: Expanded(
@@ -49,8 +50,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Title",
                           textAlign: TextAlign.center,
                           // overflow: TextOverflow.ellipsis,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                       DataColumn(
@@ -59,8 +60,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Client",
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                       DataColumn(
@@ -69,8 +70,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Freelancer",
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                       DataColumn(
@@ -79,8 +80,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Profit",
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                       DataColumn(
@@ -89,8 +90,8 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Deadline",
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                       DataColumn(
@@ -99,35 +100,49 @@ class FreelancerDetailsTable extends StatelessWidget {
                           "Status",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: appStyle(
-                              14, color.Colors.blueColor, FontWeight.w500),
+                          style: appStyle(context, 14, color.Colors.blueColor,
+                              FontWeight.w500),
                         ),
                       )),
                     ],
                     rows: List.generate(
-                      topProductID().length,
+                      oneFreelancerModel.freelancerTasks.length,
                       (index) => DataRow(
                         cells: <DataCell>[
                           DataCell(Align(
                               alignment: Alignment.center,
-                              child: Text(topProductID()[index].id))),
+                              child: Text(oneFreelancerModel
+                                  .freelancerTasks[index].serialNumber
+                                  .toString()))),
                           DataCell(Align(
                               alignment: Alignment.center,
-                              child: Text(topProductID()[index].itemCount))),
+                              child: Text(oneFreelancerModel
+                                  .freelancerTasks[index].title
+                                  .toString()))),
                           DataCell(Align(
                               alignment: Alignment.center,
-                              child: Text(topProductID()[index].salesMan))),
+                              child: Text(oneFreelancerModel
+                                      .freelancerTasks[index].client?.clientname
+                                      .toString() ??
+                                  "-"))),
                           DataCell(Align(
                               alignment: Alignment.center,
                               child: Text(
-                                topProductID()[index].price,
+                                oneFreelancerModel.freelancerTasks[index]
+                                        .freelancer?.freelancername
+                                        .toString() ??
+                                    "-",
                               ))),
                           DataCell(Align(
                               alignment: Alignment.center,
-                              child: Text(topProductID()[index].profit))),
+                              child: Text(oneFreelancerModel
+                                  .freelancerTasks[index].profitAmount
+                                  .toString()))),
                           DataCell(Align(
                               alignment: Alignment.center,
-                              child: Text(topProductID()[index].commission))),
+                              child: Text(DateFormat('yyyy-MM-dd HH:mm').format(
+                                  oneFreelancerModel.freelancerTasks[index]
+                                      .deadline as DateTime)))),
                           DataCell(
                             Align(
                               alignment: Alignment.center,
@@ -144,9 +159,14 @@ class FreelancerDetailsTable extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(10.w)),
                                   child: Text(
-                                    topProductID()[index].date,
+                                    oneFreelancerModel.freelancerTasks[index]
+                                            .taskStatus?.statusname ??
+                                        "-",
                                     textAlign: TextAlign.center,
-                                    style: appStyle(14, color.Colors.greenColor,
+                                    style: appStyle(
+                                        context,
+                                        14,
+                                        color.Colors.greenColor,
                                         FontWeight.normal),
                                   )),
                             ),

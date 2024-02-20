@@ -21,13 +21,13 @@ class PaymentMethod extends StatelessWidget {
         children: [
           Text(
             "Freelancer",
-            style: appStyle(22, Colors.black, FontWeight.w500),
+            style: appStyle(context, 22, Colors.black, FontWeight.w500),
             textAlign: TextAlign.start,
           ),
           const HeightSpacer(30),
           Text(
             "65",
-            style: appStyle(22, Colors.black, FontWeight.w400),
+            style: appStyle(context, 22, Colors.black, FontWeight.w400),
             textAlign: TextAlign.start,
           ),
           const HeightSpacer(15),
@@ -35,7 +35,8 @@ class PaymentMethod extends StatelessWidget {
             children: [
               Text(
                 "1.8%",
-                style: appStyle(18, color.Colors.blueColor, FontWeight.w500),
+                style: appStyle(
+                    context, 18, color.Colors.blueColor, FontWeight.w500),
               ),
               SizedBox(
                 width: 5.w,
@@ -49,7 +50,7 @@ class PaymentMethod extends StatelessWidget {
               ),
               Text(
                 "than last month",
-                style: appStyle(14, Colors.black, FontWeight.w300),
+                style: appStyle(context, 14, Colors.black, FontWeight.w300),
                 textAlign: TextAlign.start,
               ),
             ],

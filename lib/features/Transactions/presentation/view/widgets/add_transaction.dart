@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/core/widgets/heigher-spacer.dart';
 
-import '../../../../../core/utils/constatnt.dart';
+import '../../../../../core/utils/constant.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../Task page/presentation/view/widgets/dropdown_item.dart';
 import '../../../../Task page/presentation/view/widgets/text_field_item.dart';
@@ -44,7 +44,7 @@ class _AddTransactionViewBodyState extends State<AddTransactionViewBody> {
               alignment: Alignment.bottomCenter,
               child: Text(
                 "Add New Transaction",
-                style: appStyle(20, Colors.black, FontWeight.w900),
+                style: appStyle(context, 20, Colors.black, FontWeight.w900),
               ),
             ),
             const HeightSpacer(20),

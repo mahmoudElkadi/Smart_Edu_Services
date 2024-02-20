@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:smart/features/Statuses/presentation/view/widgets/add_status_view.dart';
 import 'package:smart/features/Statuses/presentation/view/widgets/status_table.dart';
 
 import '../../../../../core/utils/app_style.dart';
 import '../../../../../core/widgets/custom_button_icon.dart';
 import '../../../../../core/widgets/heigher-spacer.dart';
+import 'add_new_status_view_body.dart';
 
 class StatusViewBody extends StatelessWidget {
   const StatusViewBody({super.key});
@@ -23,14 +22,15 @@ class StatusViewBody extends StatelessWidget {
           children: [
             Text(
               "System Currencies",
-              style: appStyle(20, Colors.grey.shade700, FontWeight.bold),
+              style:
+                  appStyle(context, 20, Colors.grey.shade700, FontWeight.bold),
             ),
             const HeightSpacer(20),
             Align(
               alignment: Alignment.centerRight,
               child: CustomIconButton(
                 onTap: () {
-                  Get.to(() => const AddNewStatusView());
+                  openStatusDialog(context);
                 },
                 color: Colors.white,
                 backGroundColor: HexColor("#00E38C"),

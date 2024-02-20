@@ -41,14 +41,16 @@ class ActionSection extends StatelessWidget {
                       ? "Profit %"
                       : "Profit Percentage",
                   style: MediaQuery.of(context).size.width < 600
-                      ? appStyle(12, Colors.grey, FontWeight.w400)
-                      : appStyle(18, Colors.grey, FontWeight.w400)),
+                      ? appStyle(context, 12, Colors.grey, FontWeight.w400)
+                      : appStyle(context, 18, Colors.grey, FontWeight.w400)),
               const HeightSpacer(20),
               Text(
                 "37%",
                 style: MediaQuery.of(context).size.width < 600
-                    ? appStyle(12, color.Colors.blueColor, FontWeight.bold)
-                    : appStyle(18, color.Colors.greenColor, FontWeight.bold),
+                    ? appStyle(
+                        context, 12, color.Colors.blueColor, FontWeight.bold)
+                    : appStyle(
+                        context, 18, color.Colors.greenColor, FontWeight.bold),
               )
             ],
           )

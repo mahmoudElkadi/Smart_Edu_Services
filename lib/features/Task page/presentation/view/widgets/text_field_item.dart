@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart/core/widgets/heigher-spacer.dart';
 
 import '../../../../../core/utils/app_style.dart';
 import '../../../../../core/widgets/custom_form_field.dart';
 
-
 class TaskTextItem extends StatelessWidget {
-  const TaskTextItem({super.key, required this.title, required this.hint, required this.controller});
+  const TaskTextItem(
+      {super.key,
+      required this.title,
+      required this.hint,
+      required this.controller,
+      this.type});
   final String title;
   final String hint;
+  final String? type;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: 100.w,
-          child: Text(title,
-            style: appStyle(16, Colors.black, FontWeight.w500),
-            maxLines: 2,
-          ),
+        Text(
+          title,
+          style: appStyle(context, 16, Colors.black, FontWeight.w500),
+          maxLines: 2,
         ),
+        const HeightSpacer(10),
         CustomTextField(
           controller: controller,
           keyboardType: TextInputType.text,
           color: Colors.transparent,
-          label: hint,
-          hintColor: Colors.black,
-          width: MediaQuery.of(context).size.width > 600 ?600.w:250.w,
+          hintText: hint,
+          //label: hint,
+          hintColor: Colors.grey,
+          validator: (String? value) {
+            if (value!.isEmpty) {
+              return '$type must not be Empty';
+            }
+            return null;
+          },
         )
       ],
     );

@@ -6,6 +6,6 @@ class CurrencyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurrencyViewBody();
+    return const CurrencyViewBody();
   }
 }

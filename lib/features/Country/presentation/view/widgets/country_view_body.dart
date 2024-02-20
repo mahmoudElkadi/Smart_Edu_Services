@@ -17,73 +17,76 @@ class CountryViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CountryCubit(),
-      child: BlocBuilder<CountryCubit, CountryState>(
-        builder: (context, state) => SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(15.h),
-            color: Colors.grey.shade200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "System Countries",
-                  style: appStyle(20, Colors.grey.shade700, FontWeight.bold),
-                ),
-                const HeightSpacer(20),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: CountryCubit.get(context).viewText == true
-                      ? CustomIconButton(
-                          onTap: () {
-                            CountryCubit.get(context).viewText =
-                                !CountryCubit.get(context).viewText;
-                          },
-                          color: Colors.white,
-                          backGroundColor: HexColor("#00E38C"),
-                          width: MediaQuery.of(context).size.width > 600
-                              ? 240.w
-                              : 220.w,
-                          text: 'Add New Country',
-                        )
-                      : Container(
-                          height: 1,
-                        ),
-                ),
-                const HeightSpacer(30),
-                CountryCubit.get(context).viewText == false
-                    ? SafeArea(
-                        child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TaskTextItem(
-                            title: "Country",
-                            hint: "Country Name",
-                            controller:
-                                CountryCubit.get(context).countryController,
-                          ),
-                          const HeightSpacer(15),
-                          Align(
-                            alignment: Alignment.center,
-                            child: CustomButton(
-                              backGroundColor: Colors.blue,
-                              width: 200.w,
-                              text: "Add Country",
-                              onTap: () async {
-                                // Get.to(()=>const EditStatusView());
-                              },
-                            ),
-                          ),
-                          const HeightSpacer(50)
-                        ],
-                      ))
+    return BlocBuilder<CountryCubit, CountryState>(
+      builder: (context, state) => SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(15.h),
+          color: Colors.grey.shade200,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "System Countries",
+                style: appStyle(
+                    context, 20, Colors.grey.shade700, FontWeight.bold),
+              ),
+              const HeightSpacer(20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: CountryCubit.get(context).viewText == true
+                    ? CustomIconButton(
+                        onTap: () {
+                          CountryCubit.get(context).viewText =
+                              !CountryCubit.get(context).viewText;
+                        },
+                        color: Colors.white,
+                        backGroundColor: HexColor("#00E38C"),
+                        width: MediaQuery.of(context).size.width > 600
+                            ? 240.w
+                            : 220.w,
+                        text: 'Add New Country',
+                      )
                     : Container(
                         height: 1,
                       ),
-                const CountryTableScreen(),
-              ],
-            ),
+              ),
+              const HeightSpacer(30),
+              CountryCubit.get(context).viewText == false
+                  ? SafeArea(
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TaskTextItem(
+                          title: "Country",
+                          hint: "Country Name",
+                          controller:
+                              CountryCubit.get(context).countryController,
+                        ),
+                        const HeightSpacer(15),
+                        Align(
+                          alignment: Alignment.center,
+                          child: CustomButton(
+                            backGroundColor: Colors.blue,
+                            width: 200.w,
+                            text: "Add Country",
+                            onTap: () async {
+                              CountryCubit.get(context).createCountry(
+                                  country: CountryCubit.get(context)
+                                      .countryController
+                                      .text);
+                              // BlocProvider.of<CountryCubit>(context)
+                              //     .getCountry();
+                            },
+                          ),
+                        ),
+                        const HeightSpacer(50)
+                      ],
+                    ))
+                  : Container(
+                      height: 1,
+                    ),
+              const CountryTableScreen(),
+            ],
           ),
         ),
       ),

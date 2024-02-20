@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/core/utils/colors.dart' as color;
 
-import '../../../../../core/utils/constatnt.dart';
+import '../../../data/models/one_user_model.dart';
 
 class UserTaskTable extends StatelessWidget {
-  const UserTaskTable({super.key});
+  const UserTaskTable({super.key, required this.userTask});
+  final OneUserModel userTask;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,8 @@ class UserTaskTable extends StatelessWidget {
         children: [
           Text(
             "Task List",
-            style: appStyle(18, color.Colors.blueColor, FontWeight.w500),
+            style:
+                appStyle(context, 18, color.Colors.blueColor, FontWeight.w500),
           ),
           SizedBox(
             height: 10.h,
@@ -52,8 +55,8 @@ class UserTaskTable extends StatelessWidget {
                             "Title",
                             textAlign: TextAlign.center,
                             // overflow: TextOverflow.ellipsis,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                         DataColumn(
@@ -62,8 +65,8 @@ class UserTaskTable extends StatelessWidget {
                             "Client",
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                         DataColumn(
@@ -72,8 +75,8 @@ class UserTaskTable extends StatelessWidget {
                             "Freelancer",
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                         DataColumn(
@@ -82,8 +85,8 @@ class UserTaskTable extends StatelessWidget {
                             "Specialty",
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                         DataColumn(
@@ -92,8 +95,8 @@ class UserTaskTable extends StatelessWidget {
                             "Deadline",
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                         DataColumn(
@@ -102,32 +105,44 @@ class UserTaskTable extends StatelessWidget {
                             "Status",
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: appStyle(
-                                14, color.Colors.blueColor, FontWeight.w500),
+                            style: appStyle(context, 14, color.Colors.blueColor,
+                                FontWeight.w500),
                           ),
                         )),
                       ],
                       rows: List.generate(
-                        topProductID().length,
+                        userTask.userTasks.length,
                         (index) => DataRow(
                           cells: <DataCell>[
                             DataCell(Align(
                                 alignment: Alignment.center,
-                                child: Text(topProductID()[index].itemCount))),
+                                child: Text(userTask.userTasks[index].title
+                                    .toString()))),
                             DataCell(Align(
                                 alignment: Alignment.center,
-                                child: Text(topProductID()[index].salesMan))),
+                                child: Text(userTask
+                                        .userTasks[index].client?.clientname
+                                        .toString() ??
+                                    "-"))),
                             DataCell(Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  topProductID()[index].price,
+                                  userTask.userTasks[index].freelancer
+                                          ?.freelancername
+                                          .toString() ??
+                                      "-",
                                 ))),
                             DataCell(Align(
                                 alignment: Alignment.center,
-                                child: Text(topProductID()[index].profit))),
+                                child: Text(userTask.userTasks[index].speciality
+                                        ?.subSpeciality
+                                        .toString() ??
+                                    "-"))),
                             DataCell(Align(
                                 alignment: Alignment.center,
-                                child: Text(topProductID()[index].commission))),
+                                child: Text(DateFormat('yyyy-MM-dd HH:mm')
+                                    .format(userTask.userTasks[index].deadline
+                                        as DateTime)))),
                             DataCell(
                               Align(
                                 alignment: Alignment.center,
@@ -144,9 +159,13 @@ class UserTaskTable extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(10.w)),
                                     child: Text(
-                                      topProductID()[index].date,
+                                      userTask.userTasks[index].taskStatus
+                                              ?.statusname
+                                              .toString() ??
+                                          "-",
                                       textAlign: TextAlign.center,
                                       style: appStyle(
+                                          context,
                                           14,
                                           color.Colors.greenColor,
                                           FontWeight.normal),

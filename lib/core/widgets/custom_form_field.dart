@@ -53,17 +53,14 @@ class CustomTextField extends StatelessWidget {
         cursorColor: cursorColor ?? Colors.black,
         maxLines: maxLines ?? 1,
         decoration: InputDecoration(
-          label: Text(
-            label ?? "",
-            style: appStyle(18, Colors.black54, FontWeight.normal),
-          ),
+          labelText: label,
           prefixIcon: prefixIcon,
           filled: true,
           fillColor: color ?? Colors.grey,
-          //labelText: label,
           hintText: hintText,
           suffixIcon: suffixIcon,
-          hintStyle: appStyle(14, hintColor ?? Colors.grey, FontWeight.w500),
+          hintStyle:
+              appStyle(context, 14, hintColor ?? Colors.grey, FontWeight.w500),
           errorBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.red, width: 1),
               borderRadius: BorderRadius.circular(10.h)),
@@ -83,7 +80,8 @@ class CustomTextField extends StatelessWidget {
         ),
         controller: controller,
         cursorHeight: 25,
-        style: appStyle(18, textColor ?? Colors.black, FontWeight.w500),
+        style:
+            appStyle(context, 18, textColor ?? Colors.black, FontWeight.w500),
         validator: validator,
       ),
     );

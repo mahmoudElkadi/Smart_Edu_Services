@@ -11,21 +11,22 @@ class CustomIconButton extends StatelessWidget {
       required this.text,
       this.color,
       this.backGroundColor,
-      this.width});
+      this.width,
+      this.height});
   final void Function()? onTap;
   final String text;
   final Color? color;
   final Color? backGroundColor;
   final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(10.h),
-        width: width,
-        height: MediaQuery.of(context).size.width < 600 ? 55.h : 35.h,
+        padding: EdgeInsets.symmetric(
+            vertical: height ?? 10.h, horizontal: width ?? 10.w),
         decoration: BoxDecoration(
             color: backGroundColor ?? Colors.orange,
             borderRadius: BorderRadius.circular(20)),
@@ -37,11 +38,12 @@ class CustomIconButton extends StatelessWidget {
                 color: Colors.white,
               ),
               SizedBox(
-                width: 15.w,
+                width: 5.w,
               ),
               ReusableText(
                   text: text,
-                  style: appStyle(16, color ?? Colors.white, FontWeight.w600)),
+                  style: appStyle(
+                      context, 18, color ?? Colors.white, FontWeight.w600)),
             ],
           ),
         ),

@@ -101,7 +101,8 @@ class _LoginFormState extends State<LoginForm> {
                   widget: LoginCubit.get(context).isLoading == false
                       ? Text(
                           "Login",
-                          style: appStyle(16, Colors.white, FontWeight.bold),
+                          style: appStyle(
+                              context, 16, Colors.white, FontWeight.bold),
                         )
                       : const CircularProgressIndicator(
                           color: Colors.white,

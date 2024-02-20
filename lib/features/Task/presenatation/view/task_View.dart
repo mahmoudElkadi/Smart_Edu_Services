@@ -1,11 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart/core/utils/constant.dart';
+import 'package:smart/features/Task/data/repos/task_repo_impl.dart';
+import 'package:smart/features/Task/presenatation/manger/Task%20cubit/task_state.dart';
 import 'package:smart/features/Task/presenatation/view/widgets/task_view_body.dart';
 
+import '../manger/Task cubit/Task_cubit.dart';
+
 class TaskView extends StatelessWidget {
-  const TaskView({super.key});
+  const TaskView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(child: TaskViewBody());
+    if (status != '' ||
+        speciality != '' ||
+        country != '' ||
+        start != '' ||
+        end != '' ||
+        freelancer != '' ||
+        client != '' ||
+        user != '' ||
+        sort != '') {
+      return BlocProvider(
+          create: (context) => TaskCubit(TaskRepoImpl())
+            ..filterTask(status1, speciality, country, start, end, freelancer,
+                client, user, sort)
+            ..callClientCubit(context)
+            ..callStatusCubit(context)
+            ..callSpecialityCubit(context)
+            ..callCCurrencyCubit(context),
+          child: BlocBuilder<TaskCubit, TaskState>(builder: (context, state) {
+            if (state is FilterTaskSuccess) {
+              status1 = "";
+              speciality = "";
+              country = "";
+              start = "";
+              end = "";
+              freelancer = "";
+              client = "";
+              user = "";
+              sort = "";
+            }
+            return SingleChildScrollView(child: TaskViewBody());
+          }));
+    } else {
+      return BlocProvider(
+          create: (context) => TaskCubit(TaskRepoImpl())
+            ..getTask(1)
+            ..callClientCubit(context)
+            ..callStatusCubit(context)
+            ..callSpecialityCubit(context)
+            ..callCCurrencyCubit(context),
+          child: SingleChildScrollView(child: TaskViewBody()));
+    }
   }
 }

@@ -1,60 +1,79 @@
 import 'dart:convert';
-import 'package:get/get.dart';
 
-import '../../../../core/Network/shared.dart';
+import 'package:http/http.dart' as http;
+import 'package:smart/features/Task/data/model/task_res_model.dart';
+import 'package:smart/features/Task/data/repos/task_repo.dart';
+
 import '../../../../core/utils/config.dart';
-import '../model/login_request.dart';
-import '../model/login_response.dart';
-import 'login_repo.dart';
-import 'package:http/http.dart'as http;
+import '../../../../core/utils/constant.dart';
 
- class LoginRepoImpl implements LoginRepo{
-
-
+class TaskRepoImpl implements TaskRepo {
   @override
-   Future<int> loginUser(LoginReqModel model) async{
-    Map <String,String> requestHeaders ={'Content-Type':'application/json'};
-    var uri = Uri(scheme:'http', host: Config.localHost, port: 5000, path: '/api/login');
-   http.Response response =await http.post(
-     uri,
-     headers: requestHeaders,
-     body: jsonEncode(model)
-   );
+  Future<TaskModel> myTasks(int? page) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    var uri = Uri(
+        scheme: 'http',
+        host: Config.localHost,
+        port: Config.port,
+        path: '/api/task',
+        query: 'page=${page ?? 1}');
+    http.Response response = await http.get(
+      uri,
+      headers: requestHeaders,
+    );
 
-
-    if(response.statusCode==200) {
-      String userId = LoginResponseModel.fromJson(jsonDecode(response.body)).user.id;
-      String token = LoginResponseModel.fromJson(jsonDecode(response.body)).token;
-
-      await CacheHelper.saveString(key: "userId", value: userId);
-      await CacheHelper.saveString(key: "token", value: token);
-      return 0;
-    }else if(response.statusCode==400){
-      String error= jsonDecode(response.body)['err'];
-      if (error=="User doesn't exist on system!"){
-        return 1;
-      }else if(error=="Password is incorrect"){
-          return 2;
-      }
-      return 4;
+    if (response.statusCode == 200) {
+      var tasks = TaskModel.fromJson(jsonDecode(response.body));
+      return tasks;
+    } else {
+      throw Exception("failed to get task");
     }
-    else{
-      return 3;
-    }
-}
-
-
-
   }
 
+  @override
+  Future<TaskModel> filterTasks(
+      String? status,
+      String? speciality,
+      String? country,
+      String? start,
+      String? end,
+      String? freelancer,
+      String? client,
+      String? user,
+      String? sort) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    Map<String, dynamic> data = {
+      'status': status,
+      'speciality': speciality,
+      'country': country,
+      'start': start,
+      'end': end,
+      'freelancer': freelancer,
+      'client': client,
+      'user': user,
+      'sort': sort,
+    };
 
+    var uri = Uri(
+      scheme: 'http',
+      host: Config.localHost,
+      port: Config.port,
+      path: "${Config.taskUrl}/filter/result/",
+    );
+    http.Response response =
+        await http.post(uri, headers: requestHeaders, body: jsonEncode(data));
 
-
-
-
-
-
-
-
-
-
+    if (response.statusCode == 200) {
+      var tasks = TaskModel.fromJson(jsonDecode(response.body));
+      return tasks;
+    } else {
+      throw Exception("failed to get task");
+    }
+  }
+}

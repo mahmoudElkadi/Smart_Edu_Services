@@ -1,9 +1,15 @@
+import '../model/task_res_model.dart';
 
-import '../model/login_request.dart';
-
-abstract class LoginRepo
-{
-  Future<int> loginUser(LoginReqModel model);
-
+abstract class TaskRepo {
+  Future<TaskModel> myTasks(int? page);
+  Future<TaskModel> filterTasks(
+      String? status,
+      String? speciality,
+      String? country,
+      String? start,
+      String? end,
+      String? freelancer,
+      String? client,
+      String? user,
+      String? sort);
 }
-

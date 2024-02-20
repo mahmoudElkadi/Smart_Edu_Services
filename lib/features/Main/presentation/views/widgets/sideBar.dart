@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-
 class ExampleSidebarX extends StatefulWidget {
   const ExampleSidebarX({
     Key? key,
@@ -23,21 +22,18 @@ class _ExampleSidebarXState extends State<ExampleSidebarX> {
   Widget build(BuildContext context) {
     return SidebarX(
       controller: widget._controller,
-
       theme: SidebarXTheme(
-
-        margin:  EdgeInsets.all(10.h).copyWith(top: 57.h),
-        decoration:  BoxDecoration(
+        margin: EdgeInsets.all(10.h).copyWith(top: 57.h),
+        decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topRight: Radius.circular(20.h),bottomRight: Radius.circular(20.h))
-        ),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.h),
+                bottomRight: Radius.circular(20.h))),
         hoverColor: Colors.black,
         textStyle: TextStyle(color: Colors.black.withOpacity(0.7)),
         selectedTextStyle: const TextStyle(color: Colors.blue),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
-
-
         iconTheme: IconThemeData(
           color: Colors.black.withOpacity(0.7),
           size: 20,
@@ -47,89 +43,114 @@ class _ExampleSidebarXState extends State<ExampleSidebarX> {
           size: 20,
         ),
       ),
-      extendedTheme:  SidebarXTheme(
+      extendedTheme: SidebarXTheme(
         margin: EdgeInsets.only(top: 54.h),
         width: 200,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(20.h),bottomRight: Radius.circular(20.h))
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.h),
+                bottomRight: Radius.circular(20.h))),
       ),
       footerDivider: Divider(color: Colors.black.withOpacity(0.3), height: 1),
       headerBuilder: (context, extended) {
         return SizedBox(
-
           child: Padding(
             padding: const EdgeInsets.all(16.0).copyWith(top: 20.h),
-            child: Image.asset('assets/images/logo.png',
+            child: Image.asset(
+              'assets/images/logo.png',
               width: 100,
               height: 100,
             ),
           ),
         );
       },
-      items:  const [
+      items: [
         SidebarXItem(
-          icon: Icons.home_outlined,
-          label: 'Home',
-
-        ),
+            icon: Icons.home_outlined,
+            label: 'Home',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          
-          icon: FontAwesomeIcons.peopleGroup,
-          label: 'Users',
-        ),
+            icon: FontAwesomeIcons.peopleGroup,
+            label: 'Users',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: FontAwesomeIcons.solidFileLines,
-          label: 'Tasks',
-        ),
+            icon: FontAwesomeIcons.solidFileLines,
+            label: 'Tasks',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Icons.notifications,
-          label: 'Notification',
-        ),
+            icon: Icons.notifications,
+            label: 'Notification',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon:FontAwesomeIcons.userGroup,
-          label: 'Account',
-        ),
+            icon: FontAwesomeIcons.userGroup,
+            label: 'Account',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon:Icons.filter_center_focus,
-          label: 'Transaction',
-        ),
+            icon: Icons.filter_center_focus,
+            label: 'Transaction',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon:Icons.shopping_bag,
-          label: 'Freelancer',
-        ),
+            icon: Icons.shopping_bag,
+            label: 'Freelancer',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon:FontAwesomeIcons.userPlus,
-          label: 'Client',
-        ),
+            icon: FontAwesomeIcons.userPlus,
+            label: 'Client',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: FontAwesomeIcons.pen,
-          label: 'Specialities',
-        ),
+            icon: FontAwesomeIcons.pen,
+            label: 'Specialities',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Symbols.monetization_on,
-          label: 'Currencies',
-        ),
+            icon: Symbols.monetization_on,
+            label: 'Currencies',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Icons.task_alt_sharp,
-          label: 'Statuses',
-        ),
+            icon: Icons.task_alt_sharp,
+            label: 'Statuses',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Icons.flag,
-          label: 'Countries',
-        ),
+            icon: Icons.flag,
+            label: 'Countries',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Symbols.price_check,
-          label: 'Profit',
-        ),
+            icon: Symbols.price_check,
+            label: 'Profit',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
         SidebarXItem(
-          icon: Symbols.settings,
-          label: 'Settings',
-        ),
-
+            icon: Symbols.settings,
+            label: 'Settings',
+            onTap: () {
+              Navigator.of(context).pop();
+            }),
       ],
     );
   }
 }
-

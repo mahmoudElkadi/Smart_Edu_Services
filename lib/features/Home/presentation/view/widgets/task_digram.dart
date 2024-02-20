@@ -50,7 +50,7 @@ class _QuickDetailsState extends State<QuickDetails> {
             onTap: () {},
             child: Text(
               "Tasks Breakdown by Specialities",
-              style: appStyle(18, Colors.black, FontWeight.w500),
+              style: appStyle(context, 18, Colors.black, FontWeight.w500),
             ),
           ),
           const HeightSpacer(30),
@@ -93,8 +93,8 @@ class _QuickDetailsState extends State<QuickDetails> {
                             ),
                             Text(
                               ordinalDataList[index].domain,
-                              style:
-                                  appStyle(14, Colors.black, FontWeight.w500),
+                              style: appStyle(
+                                  context, 14, Colors.black, FontWeight.w500),
                             )
                           ],
                         ),
@@ -102,7 +102,8 @@ class _QuickDetailsState extends State<QuickDetails> {
                           padding: EdgeInsets.only(right: 12.w),
                           child: Text(
                             per[index].toString(),
-                            style: appStyle(16, Colors.black, FontWeight.w500),
+                            style: appStyle(
+                                context, 16, Colors.black, FontWeight.w500),
                           ),
                         ),
                       ],

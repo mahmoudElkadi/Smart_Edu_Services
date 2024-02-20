@@ -37,7 +37,8 @@ class CustomButton extends StatelessWidget {
           child: widget ??
               ReusableText(
                   text: text,
-                  style: appStyle(16, color ?? Colors.white, FontWeight.w600)),
+                  style: appStyle(
+                      context, 16, color ?? Colors.white, FontWeight.w600)),
         ),
       ),
     );

@@ -22,7 +22,7 @@ class TopFreelancer extends StatelessWidget {
         children: [
           Text(
             " Top 5 Freelancer ",
-            style: appStyle(22, Colors.black, FontWeight.w500),
+            style: appStyle(context, 22, Colors.black, FontWeight.w500),
           ),
           const HeightSpacer(25),
           Container(
@@ -91,7 +91,8 @@ class TopFreelancer extends StatelessWidget {
           const HeightSpacer(20),
           Text(
             "Add New Freelancer  >",
-            style: appStyle(18, color.Colors.blueColor, FontWeight.w500),
+            style:
+                appStyle(context, 18, color.Colors.blueColor, FontWeight.w500),
           )
         ],
       ),

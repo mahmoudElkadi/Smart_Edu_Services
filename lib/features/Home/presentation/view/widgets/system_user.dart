@@ -21,7 +21,7 @@ class TopProductsId extends StatelessWidget {
         children: [
           Text(
             " System Users ",
-            style: appStyle(22, Colors.black, FontWeight.w500),
+            style: appStyle(context, 22, Colors.black, FontWeight.w500),
           ),
           const HeightSpacer(25),
           Container(
@@ -93,7 +93,8 @@ class TopProductsId extends StatelessWidget {
           const HeightSpacer(20),
           Text(
             "Add New User  >",
-            style: appStyle(18, color.Colors.blueColor, FontWeight.w500),
+            style:
+                appStyle(context, 18, color.Colors.blueColor, FontWeight.w500),
           )
         ],
       ),

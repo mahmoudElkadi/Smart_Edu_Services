@@ -4,9 +4,11 @@ import 'package:smart/core/utils/colors.dart' as color;
 
 import '../../../../../core/utils/app_style.dart';
 import '../../../../../core/widgets/heigher-spacer.dart';
+import '../../../data/model/task_res_model.dart';
 
 class CountSection extends StatelessWidget {
-  const CountSection({super.key});
+  const CountSection({super.key, required this.taskModel});
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +30,16 @@ class CountSection extends StatelessWidget {
                     children: [
                       Text(
                         "Total Sales",
-                        style: appStyle(16, Colors.grey, FontWeight.w400),
+                        style:
+                            appStyle(context, 16, Colors.grey, FontWeight.w400),
                       ),
                       SizedBox(
                         height: 10.h,
                       ),
                       Text(
-                        "800500 EGP",
-                        style: appStyle(16, Colors.black, FontWeight.bold),
+                        "${taskModel.totalGain.toString()} EGP",
+                        style: appStyle(
+                            context, 16, Colors.black, FontWeight.bold),
                       ),
                     ],
                   ),
@@ -43,14 +47,16 @@ class CountSection extends StatelessWidget {
                     children: [
                       Text(
                         "Total Profit",
-                        style: appStyle(16, Colors.grey, FontWeight.w400),
+                        style:
+                            appStyle(context, 16, Colors.grey, FontWeight.w400),
                       ),
                       SizedBox(
                         height: 10.h,
                       ),
                       Text(
-                        "400250 EGP",
-                        style: appStyle(16, Colors.black, FontWeight.bold),
+                        "${taskModel.totalProfit.toString()} EGP",
+                        style: appStyle(
+                            context, 16, Colors.black, FontWeight.bold),
                       ),
                     ],
                   ),
@@ -62,8 +68,8 @@ class CountSection extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "Task completion - 90%",
-                    style: appStyle(16, Colors.black, FontWeight.w500),
+                    "Task completion - ${taskModel.totalProfitPercentage.toString()}%",
+                    style: appStyle(context, 16, Colors.black, FontWeight.w500),
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
@@ -72,7 +78,8 @@ class CountSection extends StatelessWidget {
                         thumbShape: const RoundSliderThumbShape(
                             enabledThumbRadius: 0.0)),
                     child: Slider(
-                      value: 90,
+                      value: double.parse(
+                          taskModel.totalProfitPercentage.toString()),
                       max: 100,
                       min: 0,
                       activeColor: Colors.green,
@@ -93,19 +100,19 @@ class CountSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const CountItem(
+              CountItem(
                 title: "Total Gain",
-                price: "656245",
+                price: taskModel.totalGain.toString(),
               ),
               const MyDivider(),
-              const CountItem(
+              CountItem(
                 title: "Total Cost",
-                price: "265142",
+                price: taskModel.totalCost.toString(),
               ),
               const MyDivider(),
-              const CountItem(
+              CountItem(
                 title: "Total Profit",
-                price: "700000",
+                price: taskModel.totalProfit.toString(),
               ),
               const MyDivider(),
               Column(
@@ -116,15 +123,17 @@ class CountSection extends StatelessWidget {
                           ? "Profit %"
                           : "Profit Percentage",
                       style: MediaQuery.of(context).size.width < 600
-                          ? appStyle(12, Colors.grey, FontWeight.w400)
-                          : appStyle(18, Colors.grey, FontWeight.w400)),
+                          ? appStyle(context, 12, Colors.grey, FontWeight.w400)
+                          : appStyle(
+                              context, 18, Colors.grey, FontWeight.w400)),
                   const HeightSpacer(20),
                   Text(
-                    "37%",
+                    "${taskModel.totalProfitPercentage}%",
                     style: MediaQuery.of(context).size.width < 600
-                        ? appStyle(12, color.Colors.greenColor, FontWeight.bold)
-                        : appStyle(
-                            18, color.Colors.greenColor, FontWeight.bold),
+                        ? appStyle(context, 12, color.Colors.greenColor,
+                            FontWeight.bold)
+                        : appStyle(context, 18, color.Colors.greenColor,
+                            FontWeight.bold),
                   )
                 ],
               )
@@ -148,14 +157,14 @@ class CountItem extends StatelessWidget {
       children: [
         Text(title,
             style: MediaQuery.of(context).size.width < 600
-                ? appStyle(12, Colors.grey, FontWeight.w400)
-                : appStyle(18, Colors.grey, FontWeight.w400)),
+                ? appStyle(context, 12, Colors.grey, FontWeight.w400)
+                : appStyle(context, 18, Colors.grey, FontWeight.w400)),
         const HeightSpacer(20),
         Text(
           price,
           style: MediaQuery.of(context).size.width < 600
-              ? appStyle(12, Colors.black, FontWeight.bold)
-              : appStyle(18, Colors.black, FontWeight.bold),
+              ? appStyle(context, 12, Colors.black, FontWeight.bold)
+              : appStyle(context, 18, Colors.black, FontWeight.bold),
         )
       ],
     );

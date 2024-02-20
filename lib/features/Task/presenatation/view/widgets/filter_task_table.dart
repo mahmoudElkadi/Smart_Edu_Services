@@ -27,30 +27,6 @@ class FilterTaskTable extends StatelessWidget {
                                   : 680.h,
                               color: Colors.white,
                               child: const FilterData()),
-                          GestureDetector(
-                            onTap: () {
-                              print("sss");
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: 150.w,
-                              height: MediaQuery.of(context).size.width > 600
-                                  ? 40.h
-                                  : 50.h,
-                              padding: EdgeInsets.all(15.h),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(20.h)),
-                              child: const Text(
-                                "Filter",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ),
                           const HeightSpacer(20)
                         ],
                       ),
