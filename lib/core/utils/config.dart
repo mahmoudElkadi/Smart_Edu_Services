@@ -1,5 +1,5 @@
 class Config {
-  static const localHost = "192.168.1.22";
+  static const localHost = "192.168.1.11";
   static const port = 5050;
   static const String loginUrl = "/api/login";
   static const String taskUrl = "/api/task";

@@ -14,7 +14,7 @@ class TaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (status != '' ||
+    if (status1 != '' ||
         speciality != '' ||
         country != '' ||
         start != '' ||
@@ -43,17 +43,17 @@ class TaskView extends StatelessWidget {
               user = "";
               sort = "";
             }
-            return SingleChildScrollView(child: TaskViewBody());
+            return const SingleChildScrollView(child: TaskViewBody());
           }));
     } else {
       return BlocProvider(
           create: (context) => TaskCubit(TaskRepoImpl())
-            ..getTask(1)
+            ..getTasks()
             ..callClientCubit(context)
             ..callStatusCubit(context)
             ..callSpecialityCubit(context)
             ..callCCurrencyCubit(context),
-          child: SingleChildScrollView(child: TaskViewBody()));
+          child: const TaskViewBody());
     }
   }
 }

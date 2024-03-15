@@ -20,6 +20,11 @@ class FreelancerCubit extends Cubit<FreelancerState> {
 
   FreelancerRepo freelancerRepo;
 
+  var selectedSpeciality;
+  var selectedSort;
+  String? specialityValue;
+  String? sortValue;
+
   TextEditingController subFreelancerController = TextEditingController();
   TextEditingController FreelancerController = TextEditingController();
 

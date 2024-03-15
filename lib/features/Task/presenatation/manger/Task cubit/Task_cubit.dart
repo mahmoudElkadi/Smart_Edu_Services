@@ -16,10 +16,74 @@ import '../../../../freelancer/presentation/manger/Freelancer cubit/Freelancer_c
 
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit(this.taskRepo) : super(TaskInitial());
-
   static TaskCubit get(context) => BlocProvider.of(context);
 
   TaskRepo taskRepo;
+  int limit = 3;
+
+  TaskRepo get repository => taskRepo; // Getter for easier access
+
+  ScrollController scrollController = ScrollController();
+  bool isLoadMore = false;
+  int page = 1;
+  int totalProfit = 0;
+  int totalGain = 0;
+  int totalCost = 0;
+  double totalProfitPercentage = 0;
+  List<Task> tasks = [];
+  TaskModel? response;
+
+  Future<void> getTasks() async {
+    try {
+      emit(TasksLoading()); // Use TasksLoading for consistency
+
+      response = await repository.myTasks(page);
+      final newTasks = response?.tasks;
+
+      tasks = tasks..addAll(newTasks!); // Efficiently append new tasks
+      isLoadMore = false;
+      totalProfit = totalProfit + response!.totalProfit!.toInt();
+      totalGain = totalGain + response!.totalGain!.toInt();
+      totalCost = totalCost + response!.totalCost!.toInt();
+      totalProfitPercentage = ((totalProfit / totalGain) * 100);
+      emit(TasksLoaded(
+          tasks, isLoadMore)); // Emit state with tasks and loading flag
+    } catch (error) {
+      emit(
+          TasksError(error.toString())); // Handle errors with a dedicated state
+    }
+  }
+
+  void pagination() {
+    scrollController.addListener(loadMore);
+  }
+
+  Future<void> loadMore() async {
+    if (isLoadMore) return; // Exit if already loading
+
+    try {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
+        isLoadMore = true;
+        emit(TasksLoadingMore());
+
+        final response = await repository.myTasks(page);
+        final newTasks = response.tasks;
+
+        tasks.addAll(newTasks);
+        totalProfit = totalProfit + response.totalProfit!.toInt();
+        totalGain = totalGain + response.totalGain!.toInt();
+        totalCost = totalCost + response.totalCost!.toInt();
+        totalProfitPercentage = ((totalProfit / totalGain) * 100);
+        isLoadMore = false;
+        page++;
+
+        emit(TasksLoaded(tasks, isLoadMore));
+      }
+    } catch (error) {
+      emit(TasksError(error.toString()));
+    }
+  }
 
   bool _viewText = true;
 
@@ -31,11 +95,13 @@ class TaskCubit extends Cubit<TaskState> {
   }
 
   late Future<TaskModel> myTasks;
+  late TaskModel myTasks2;
 
-  getTask(int x) {
+  getTask() async {
     try {
       emit(GetTaskLoading());
-      myTasks = taskRepo.myTasks(x);
+      myTasks = taskRepo.myTasks(page);
+
       emit(GetTaskSuccess());
     } catch (error) {
       Get.snackbar(error.toString(), "Tasks Error");
@@ -51,11 +117,15 @@ class TaskCubit extends Cubit<TaskState> {
       String? freelancer,
       String? client,
       String? user,
-      String? sort) {
+      String? sort) async {
     try {
       emit(FilterTaskLoading());
-      myTasks = taskRepo.filterTasks(status, speciality, country, start, end,
-          freelancer, client, user, sort);
+      response = await repository.filterTasks(status, speciality, country,
+          start, end, freelancer, client, user, sort);
+      final newTasks = response?.tasks;
+      tasks = [];
+      tasks = tasks..addAll(newTasks!);
+
       emit(FilterTaskSuccess());
     } catch (error) {
       Get.snackbar(error.toString(), "Tasks Error");

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "271035081904",
+    "project_id": "task-base-cd324",
+    "storage_bucket": "task-base-cd324.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271035081904:android:e886729302846a95f70775",
+        "android_client_info": {
+          "package_name": "com.example.smart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiFvFWvicIrbdvFK4PUTFA5x-GWjC2hks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

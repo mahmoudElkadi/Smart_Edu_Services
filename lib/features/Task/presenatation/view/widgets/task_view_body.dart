@@ -7,15 +7,14 @@ import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/core/widgets/heigher-spacer.dart';
 import 'package:smart/features/Task/presenatation/manger/Task%20cubit/Task_cubit.dart';
 import 'package:smart/features/Task/presenatation/manger/Task%20cubit/task_state.dart';
-import 'package:smart/features/Task/presenatation/view/widgets/count_view.dart';
-import 'package:smart/features/Task/presenatation/view/widgets/sort_by.dart';
 import 'package:smart/features/Task/presenatation/view/widgets/status_grid_view.dart';
-import 'package:smart/features/Task/presenatation/view/widgets/task_table.dart';
+import 'package:smart/features/Task/presenatation/view/widgets/task_item.dart';
 
 import '../../../../../core/widgets/custom_button_icon.dart';
 import '../../../../Task page/presentation/view/Task_page.dart';
+import 'count_view.dart';
 
-class TaskViewBody extends StatelessWidget {
+class TaskViewBody extends StatefulWidget {
   const TaskViewBody(
       {super.key,
       this.status,
@@ -38,74 +37,106 @@ class TaskViewBody extends StatelessWidget {
   final String? sort;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TaskCubit, TaskState>(
-      builder: (context, state) => FutureBuilder(
-          future: TaskCubit.get(context).myTasks,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              {
-                final task = snapshot.data;
+  State<TaskViewBody> createState() => _TaskViewBodyState();
+}
 
-                return Padding(
-                  padding: EdgeInsets.all(15.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+class _TaskViewBodyState extends State<TaskViewBody> {
+  @override
+  void initState() {
+    TaskCubit.get(context).pagination();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<TaskCubit, TaskState>(
+      listener: (context, state) {},
+      builder: (context, state) => Builder(builder: (context) {
+        final tasks =
+            TaskCubit.get(context).response; // Access tasks directly from Cubit
+        final isLoading =
+            TaskCubit.get(context).state is TasksLoading; // Check loading state
+        final hasError = TaskCubit.get(context).state is TasksError;
+
+        if (isLoading && tasks == null) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (hasError) {
+          final error = (TaskCubit.get(context).state as TasksError).message;
+          return throw Exception(error);
+        } else {
+          return SingleChildScrollView(
+            controller: TaskCubit.get(context).scrollController,
+            child: Padding(
+              padding: EdgeInsets.all(15.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              print(TaskCubit.get(context).myTasks);
-                              //await TaskCubit.get(context).getTask();
-                              TaskCubit.get(context).viewText =
-                                  !TaskCubit.get(context).viewText;
-                            },
-                            child: Text(
-                              "Change View To Count >",
-                              style: appStyle(
-                                  context, 14, Colors.blue, FontWeight.bold),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: CustomIconButton(
-                              onTap: () {
-                                Get.to(() => const AddTaskView());
-                              },
-                              height: 15,
-                              color: Colors.white,
-                              backGroundColor: HexColor("#00E38C"),
-                              text: 'Add New Tasks',
-                            ),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            TaskCubit.get(context).viewText =
+                                !TaskCubit.get(context).viewText;
+                          });
+                        },
+                        child: Text(
+                          "Change View To Count >",
+                          style: appStyle(
+                              context, 14, Colors.blue, FontWeight.bold),
+                        ),
                       ),
-                      const HeightSpacer(15),
-                      TaskCubit.get(context).viewText == true
-                          ? const StatusGridView()
-                          : CountSection(taskModel: snapshot.data!),
-                      const HeightSpacer(15),
-                      const SortByView(),
-                      TaskTable(
-                        taskModel: task!,
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: CustomIconButton(
+                          onTap: () {
+                            Get.to(() => const AddTaskView());
+                          },
+                          height: 15,
+                          color: Colors.white,
+                          backGroundColor: HexColor("#00E38C"),
+                          text: 'Add New Tasks',
+                        ),
                       ),
                     ],
                   ),
-                );
-              }
-            } else if (snapshot.hasError) {
-              return throw Exception(snapshot);
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+                  const HeightSpacer(15),
+                  TaskCubit.get(context).viewText == true
+                      ? const StatusGridView()
+                      : CountSection(taskModel: tasks!),
+                  const HeightSpacer(15),
+                  ListView.separated(
+                    physics:
+                        const NeverScrollableScrollPhysics(), // Enable scrolling
+                    shrinkWrap: true, // Adjust based on your layout needs
+                    itemBuilder: (context, index) {
+                      if (index == TaskCubit.get(context).tasks.length - 1 &&
+                          TaskCubit.get(context).isLoadMore) {
+                        return const Center(
+                            child:
+                                CircularProgressIndicator()); // Show loading indicator
+                      }
+                      return TaskItem(
+                        color: Colors.blue,
+                        task: TaskCubit.get(context).tasks[index],
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const HeightSpacer(15),
+                    itemCount: TaskCubit.get(context)
+                        .tasks
+                        .length, // Use Cubit's tasks
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+      }),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/features/Client/presentation/view/client_view.dart';
@@ -14,6 +15,7 @@ import '../../../Account/presentation/view/account_View.dart';
 import '../../../Country/presentation/view/country_view.dart';
 import '../../../Currency/presentation/view/currencyView.dart';
 import '../../../Home/presentation/view/home_view.dart';
+import '../../../Login/presentation/view/login_view.dart';
 import '../../../Profit/presentation/view/profit_view.dart';
 import '../../../Settings/presentation/view/settings_view.dart';
 import '../../../Specialities/presentation/view/specialities_view.dart';
@@ -123,7 +125,7 @@ class _MainViewState extends State<MainView> {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return TaskView();
+                              return const TaskView();
                             case 3:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
@@ -180,6 +182,17 @@ class _MainViewState extends State<MainView> {
                                 setState(() {});
                               });
                               return const SettingView();
+                            case 14:
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                setState(() async {
+                                  await CacheHelper.removeData(key: "token");
+                                  await CacheHelper.removeData(key: "userId");
+                                  await CacheHelper.removeData(key: "userRole");
+                                  Get.off(() => const LoginView());
+                                });
+                              });
+                              return const LoginView();
+
                             default:
                               return Text(
                                 "pageTitle",
@@ -198,68 +211,79 @@ class _MainViewState extends State<MainView> {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return const UserView();
+                              return const NotificationView();
                             case 2:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return TaskView();
+                              return const FreelancerView();
                             case 3:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return const NotificationView();
+                              return const SpecialtyView();
                             case 4:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return const AccountView();
+                              return const SettingView();
+
                             case 5:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
+                                setState(() async {
+                                  await CacheHelper.removeData(key: "token");
+                                  await CacheHelper.removeData(key: "userId");
+                                  await CacheHelper.removeData(key: "userRole");
+                                  Get.off(() => const LoginView());
+                                });
                               });
-                              return const TransactionView();
-                            case 6:
+                              return const LoginView();
+
+                            default:
+                              return Text(
+                                "pageTitle",
+                                style: appStyle(
+                                    context, 16, Colors.black, FontWeight.bold),
+                              );
+                          }
+                        case "customerService":
+                          switch (_controller.selectedIndex) {
+                            case 0:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return const FreelancerView();
-                            case 7:
+                              return const TaskView();
+                            case 1:
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                setState(() {});
+                              });
+                              return const NotificationView();
+                            case 2:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
                               return const SystemClientView();
-                            case 8:
+                            case 3:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
                               return const SpecialtyView();
-
-                            case 9:
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
-                              });
-                              return const CurrencyView();
-                            case 10:
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
-                              });
-                              return const StatusViewBody();
-                            case 11:
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
-                              });
-                              return const CountryView();
-                            case 12:
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
-                              });
-                              return const ProfitView();
-                            case 13:
+                            case 4:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
                               return const SettingView();
+                            case 5:
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                setState(() async {
+                                  await CacheHelper.removeData(key: "token");
+                                  await CacheHelper.removeData(key: "userId");
+                                  await CacheHelper.removeData(key: "userRole");
+                                  Get.off(() => const LoginView());
+                                });
+                              });
+                              return const LoginView();
+
                             default:
                               return Text(
                                 "pageTitle",
@@ -274,85 +298,6 @@ class _MainViewState extends State<MainView> {
                                 context, 16, Colors.black, FontWeight.bold),
                           );
                       }
-                      // switch (_controller.selectedIndex) {
-                      //   case 0:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const HomeView();
-                      //   case 1:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const UserView();
-                      //   case 2:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return TaskView();
-                      //   case 3:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const NotificationView();
-                      //   case 4:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const AccountView();
-                      //   case 5:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const TransactionView();
-                      //   case 6:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const FreelancerView();
-                      //   case 7:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const SystemClientView();
-                      //   case 8:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const SpecialtyView();
-                      //
-                      //   case 9:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const CurrencyView();
-                      //   case 10:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const StatusViewBody();
-                      //   case 11:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const CountryView();
-                      //   case 12:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const ProfitView();
-                      //   case 13:
-                      //     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      //       setState(() {});
-                      //     });
-                      //     return const SettingView();
-                      //   default:
-                      //     return Text(
-                      //       "pageTitle",
-                      //       style: appStyle(
-                      //           context, 16, Colors.black, FontWeight.bold),
-                      //     );
-                      // }
                     },
                   ),
                 ),

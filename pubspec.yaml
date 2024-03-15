@@ -59,6 +59,10 @@ dependencies:
   pull_to_refresh: ^2.0.0
   flutter_svg: ^2.0.9
   dropdown_button2: ^2.3.9
+  delayed_widget: ^1.1.1
+  firebase_messaging: ^14.6.3
+  firebase_core: ^2.13.0
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

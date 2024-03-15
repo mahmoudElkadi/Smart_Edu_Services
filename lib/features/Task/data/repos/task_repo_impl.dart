@@ -14,12 +14,11 @@ class TaskRepoImpl implements TaskRepo {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    var uri = Uri(
-        scheme: 'http',
-        host: Config.localHost,
-        port: Config.port,
-        path: '/api/task',
-        query: 'page=${page ?? 1}');
+
+    var uri =
+        Uri.parse("http://192.168.0.121:5050/api/task?page=$page&limit=3");
+    print(uri);
+
     http.Response response = await http.get(
       uri,
       headers: requestHeaders,
@@ -29,7 +28,7 @@ class TaskRepoImpl implements TaskRepo {
       var tasks = TaskModel.fromJson(jsonDecode(response.body));
       return tasks;
     } else {
-      throw Exception("failed to get task");
+      throw Exception(response.body);
     }
   }
 
@@ -68,6 +67,7 @@ class TaskRepoImpl implements TaskRepo {
     );
     http.Response response =
         await http.post(uri, headers: requestHeaders, body: jsonEncode(data));
+    print(uri);
 
     if (response.statusCode == 200) {
       var tasks = TaskModel.fromJson(jsonDecode(response.body));

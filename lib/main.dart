@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +15,7 @@ import 'package:smart/features/Statuses/presentation/manger/Status%20cubit/Statu
 import 'core/Network/MyBlocObserver.dart';
 import 'core/Network/shared.dart';
 import 'core/utils/constant.dart';
+import 'core/widgets/toast.dart';
 import 'features/Client/data/repo/client_repo_impl.dart';
 import 'features/Country/data/repos/country_repo_impl.dart';
 import 'features/Country/presentation/manger/country cubit/Country_cubit.dart';
@@ -24,10 +27,40 @@ import 'features/freelancer/data/repos/freelancer_repo_impl.dart';
 import 'features/freelancer/presentation/manger/Freelancer cubit/Freelancer_cubit.dart';
 
 Widget defaultHome = const MainView();
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print('on background message');
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyDiFvFWvicIrbdvFK4PUTFA5x-GWjC2hks",
+      appId: "1:271035081904:android:e886729302846a95f70775",
+      messagingSenderId: "271035081904",
+      projectId: "task-base-cd324",
+    ),
+  );
+
+  var deviceToken = await FirebaseMessaging.instance.getToken();
+
+  print("dev $deviceToken");
+
+  FirebaseMessaging.onMessage.listen((event) {
+    print(event.data.toString());
+
+    showToast(msg: 'on message', state: ToastStatus.SUCCESS);
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print(event.data.toString());
+    showToast(msg: 'on message Opened app', state: ToastStatus.SUCCESS);
+  });
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   await CacheHelper.init();
   token = CacheHelper.getData(key: "token");

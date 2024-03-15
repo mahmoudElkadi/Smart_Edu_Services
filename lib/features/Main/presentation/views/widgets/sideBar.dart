@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:sidebarx/sidebarx.dart';
 
+import '../../../../../core/utils/constant.dart';
+
 class ExampleSidebarX extends StatefulWidget {
   const ExampleSidebarX({
     Key? key,
@@ -65,92 +67,176 @@ class _ExampleSidebarXState extends State<ExampleSidebarX> {
           ),
         );
       },
-      items: [
-        SidebarXItem(
-            icon: Icons.home_outlined,
-            label: 'Home',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: FontAwesomeIcons.peopleGroup,
-            label: 'Users',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: FontAwesomeIcons.solidFileLines,
-            label: 'Tasks',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Icons.notifications,
-            label: 'Notification',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: FontAwesomeIcons.userGroup,
-            label: 'Account',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Icons.filter_center_focus,
-            label: 'Transaction',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Icons.shopping_bag,
-            label: 'Freelancer',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: FontAwesomeIcons.userPlus,
-            label: 'Client',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: FontAwesomeIcons.pen,
-            label: 'Specialities',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Symbols.monetization_on,
-            label: 'Currencies',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Icons.task_alt_sharp,
-            label: 'Statuses',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Icons.flag,
-            label: 'Countries',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Symbols.price_check,
-            label: 'Profit',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-        SidebarXItem(
-            icon: Symbols.settings,
-            label: 'Settings',
-            onTap: () {
-              Navigator.of(context).pop();
-            }),
-      ],
+      items: userRole! == "admin"
+          ? [
+              SidebarXItem(
+                  icon: Icons.home_outlined,
+                  label: 'Home',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: FontAwesomeIcons.peopleGroup,
+                  label: 'Users',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: FontAwesomeIcons.solidFileLines,
+                  label: 'Tasks',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Icons.notifications,
+                  label: 'Notification',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: FontAwesomeIcons.userGroup,
+                  label: 'Account',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Icons.filter_center_focus,
+                  label: 'Transaction',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Icons.shopping_bag,
+                  label: 'Freelancer',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: FontAwesomeIcons.userPlus,
+                  label: 'Client',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: FontAwesomeIcons.pen,
+                  label: 'Specialities',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Symbols.monetization_on,
+                  label: 'Currencies',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Icons.task_alt_sharp,
+                  label: 'Statuses',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Icons.flag,
+                  label: 'Countries',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Symbols.price_check,
+                  label: 'Profit',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Symbols.settings,
+                  label: 'Settings',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+              SidebarXItem(
+                  icon: Symbols.logout,
+                  label: 'Logout',
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  }),
+            ]
+          : userRole! == "specialistService"
+              ? [
+                  SidebarXItem(
+                      icon: FontAwesomeIcons.solidFileLines,
+                      label: 'Tasks',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Icons.notifications,
+                      label: 'Notification',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Icons.shopping_bag,
+                      label: 'Freelancer',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: FontAwesomeIcons.pen,
+                      label: 'Specialities',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Symbols.settings,
+                      label: 'Settings',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Symbols.logout,
+                      label: 'Logout',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                ]
+              : [
+                  SidebarXItem(
+                      icon: FontAwesomeIcons.solidFileLines,
+                      label: 'Tasks',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Icons.notifications,
+                      label: 'Notification',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: FontAwesomeIcons.userPlus,
+                      label: 'Client',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: FontAwesomeIcons.pen,
+                      label: 'Specialities',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Symbols.settings,
+                      label: 'Settings',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                  SidebarXItem(
+                      icon: Symbols.logout,
+                      label: 'Logout',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      }),
+                ],
     );
   }
 }

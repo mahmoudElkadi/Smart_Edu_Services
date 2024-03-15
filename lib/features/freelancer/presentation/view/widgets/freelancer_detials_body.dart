@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:smart/features/Main/presentation/views/main_view.dart';
 import 'package:smart/features/freelancer/presentation/manger/Freelancer%20cubit/Freelancer_cubit.dart';
 import 'package:smart/features/freelancer/presentation/manger/Freelancer%20cubit/Freelancer_state.dart';
 
@@ -34,7 +35,7 @@ class FreelancerDetialsViewBody extends StatelessWidget {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                Get.back();
+                                Get.offAll(() => const MainView(x: 6));
                               },
                               child: const Icon(Icons.arrow_back)),
                           Column(

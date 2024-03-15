@@ -20,6 +20,11 @@ class ClientCubit extends Cubit<ClientState> {
 
   ClientRepo clientRepo;
 
+  var selectedCountry;
+  var selectedSort;
+  String? countryValue;
+  String? sortValue;
+
   TextEditingController subClientController = TextEditingController();
   TextEditingController ClientController = TextEditingController();
 
