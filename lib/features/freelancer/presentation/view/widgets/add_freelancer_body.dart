@@ -229,10 +229,10 @@ class _AddNewFreelancerViewBodyState extends State<AddNewFreelancerViewBody> {
                                       FreelancerCubit.get(context).isLoading ==
                                               false
                                           ? Text(
-                                              "Edit",
+                                              "Add Freelancer",
                                               style: appStyle(
                                                   context,
-                                                  16,
+                                                  18,
                                                   Colors.white,
                                                   FontWeight.bold),
                                             )

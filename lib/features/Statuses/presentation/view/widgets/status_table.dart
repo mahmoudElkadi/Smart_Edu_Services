@@ -28,14 +28,13 @@ class StatusTableScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   child: SizedBox(
-                    width: 700,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width * 0.95,
                             child: DataTable(
                               border: TableBorder(
                                   horizontalInside: BorderSide(
@@ -43,16 +42,17 @@ class StatusTableScreen extends StatelessWidget {
                                       width: 20.w)),
                               dataRowMaxHeight: 80,
                               dataRowMinHeight: 50,
-                              columnSpacing: 30,
+                              columnSpacing: 10,
+                              showCheckboxColumn: false,
                               headingRowColor: MaterialStateColor.resolveWith(
                                   (states) => Colors.grey.shade100),
                               columns: <DataColumn>[
                                 DataColumn(
                                     label: Expanded(
                                   child: Text(
-                                    "Name",
+                                    "      Name",
                                     overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
+                                    textAlign: TextAlign.start,
                                     style: appStyle(
                                         context,
                                         14,
@@ -63,9 +63,9 @@ class StatusTableScreen extends StatelessWidget {
                                 DataColumn(
                                     label: Expanded(
                                   child: Text(
-                                    "Role",
+                                    "           Role",
                                     overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
+                                    textAlign: TextAlign.start,
                                     style: appStyle(
                                         context,
                                         16,
@@ -86,11 +86,7 @@ class StatusTableScreen extends StatelessWidget {
                                 (index) => DataRow(
                                     cells: <DataCell>[
                                       DataCell(Align(
-                                        alignment:
-                                            MediaQuery.of(context).size.width >
-                                                    600
-                                                ? Alignment.center
-                                                : Alignment.center,
+                                        alignment: Alignment.centerLeft,
                                         child: Text(
                                           status.statuses[index].statusname
                                               as String,
@@ -98,14 +94,14 @@ class StatusTableScreen extends StatelessWidget {
                                         ),
                                       )),
                                       DataCell(Align(
-                                        alignment: Alignment.center,
+                                        alignment: Alignment.centerLeft,
                                         child: Text(
                                           status.statuses[index].role as String,
                                           textAlign: TextAlign.center,
                                         ),
                                       )),
                                       DataCell(Align(
-                                        alignment: Alignment.centerRight,
+                                        alignment: Alignment.center,
                                         child: GestureDetector(
                                             onTap: () {
                                               StatusCubit.get(context)

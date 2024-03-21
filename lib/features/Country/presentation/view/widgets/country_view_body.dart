@@ -25,30 +25,32 @@ class CountryViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "System Countries",
-                style: appStyle(
-                    context, 20, Colors.grey.shade700, FontWeight.bold),
-              ),
-              const HeightSpacer(20),
-              Align(
-                alignment: Alignment.centerRight,
-                child: CountryCubit.get(context).viewText == true
-                    ? CustomIconButton(
-                        onTap: () {
-                          CountryCubit.get(context).viewText =
-                              !CountryCubit.get(context).viewText;
-                        },
-                        color: Colors.white,
-                        backGroundColor: HexColor("#00E38C"),
-                        width: MediaQuery.of(context).size.width > 600
-                            ? 240.w
-                            : 220.w,
-                        text: 'Add New Country',
-                      )
-                    : Container(
-                        height: 1,
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "System Countries",
+                    style: appStyle(
+                        context, 20, Colors.grey.shade700, FontWeight.bold),
+                  ),
+                  const HeightSpacer(20),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: CountryCubit.get(context).viewText == true
+                        ? CustomIconButton(
+                            onTap: () {
+                              CountryCubit.get(context).viewText =
+                                  !CountryCubit.get(context).viewText;
+                            },
+                            color: Colors.white,
+                            backGroundColor: HexColor("#00E38C"),
+                            text: 'Add New Country',
+                          )
+                        : Container(
+                            height: 1,
+                          ),
+                  ),
+                ],
               ),
               const HeightSpacer(30),
               CountryCubit.get(context).viewText == false

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeightSpacer extends StatelessWidget {
   const HeightSpacer(this.size, {super.key});
-  final int size;
+  final double size;
 
   @override
   Widget build(BuildContext context) {

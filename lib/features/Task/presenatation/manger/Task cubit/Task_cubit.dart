@@ -6,6 +6,7 @@ import 'package:smart/features/Task/data/model/task_res_model.dart';
 import 'package:smart/features/Task/data/repos/task_repo.dart';
 import 'package:smart/features/Task/presenatation/manger/Task%20cubit/task_state.dart';
 
+import '../../../../../core/utils/constant.dart';
 import '../../../../Client/presentation/manger/client cubit/client_cubit.dart';
 import '../../../../Country/presentation/manger/country cubit/Country_cubit.dart';
 import '../../../../Currency/presentation/manger/Task cubit/currency_cubit.dart';
@@ -106,6 +107,19 @@ class TaskCubit extends Cubit<TaskState> {
     } catch (error) {
       Get.snackbar(error.toString(), "Tasks Error");
     }
+  }
+
+  changeValue() {
+    status1 = '';
+    speciality = '';
+    country = '';
+    start = '';
+    end = '';
+    freelancer = '';
+    client = '';
+    user = '';
+    sort = '';
+    emit(ChangeValue());
   }
 
   filterTask(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:smart/core/widgets/toast.dart';
 import 'package:smart/features/Client/presentation/manger/client%20cubit/client_cubit.dart';
 import 'package:smart/features/Currency/data/repos/currency_repo_impl.dart';
 import 'package:smart/features/Currency/presentation/manger/Task%20cubit/currency_cubit.dart';
@@ -15,7 +16,6 @@ import 'package:smart/features/Statuses/presentation/manger/Status%20cubit/Statu
 import 'core/Network/MyBlocObserver.dart';
 import 'core/Network/shared.dart';
 import 'core/utils/constant.dart';
-import 'core/widgets/toast.dart';
 import 'features/Client/data/repo/client_repo_impl.dart';
 import 'features/Country/data/repos/country_repo_impl.dart';
 import 'features/Country/presentation/manger/country cubit/Country_cubit.dart';

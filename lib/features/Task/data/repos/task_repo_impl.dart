@@ -15,8 +15,8 @@ class TaskRepoImpl implements TaskRepo {
       'Authorization': 'Bearer $token'
     };
 
-    var uri =
-        Uri.parse("http://192.168.0.121:5050/api/task?page=$page&limit=3");
+    var uri = Uri.parse(
+        "http://${Config.localHost}:5050/api/task?page=$page&limit=3");
     print(uri);
 
     http.Response response = await http.get(

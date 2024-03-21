@@ -27,22 +27,12 @@ class TaskView extends StatelessWidget {
           create: (context) => TaskCubit(TaskRepoImpl())
             ..filterTask(status1, speciality, country, start, end, freelancer,
                 client, user, sort)
+            ..changeValue()
             ..callClientCubit(context)
             ..callStatusCubit(context)
             ..callSpecialityCubit(context)
             ..callCCurrencyCubit(context),
           child: BlocBuilder<TaskCubit, TaskState>(builder: (context, state) {
-            if (state is FilterTaskSuccess) {
-              status1 = "";
-              speciality = "";
-              country = "";
-              start = "";
-              end = "";
-              freelancer = "";
-              client = "";
-              user = "";
-              sort = "";
-            }
             return const SingleChildScrollView(child: TaskViewBody());
           }));
     } else {

@@ -12,13 +12,15 @@ class CustomIconButton extends StatelessWidget {
       this.color,
       this.backGroundColor,
       this.width,
-      this.height});
+      this.height,
+      this.fontSize});
   final void Function()? onTap;
   final String text;
   final Color? color;
   final Color? backGroundColor;
   final double? width;
   final double? height;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,8 @@ class CustomIconButton extends StatelessWidget {
               ),
               ReusableText(
                   text: text,
-                  style: appStyle(
-                      context, 18, color ?? Colors.white, FontWeight.w600)),
+                  style: appStyle(context, fontSize ?? 18,
+                      color ?? Colors.white, FontWeight.w600)),
             ],
           ),
         ),

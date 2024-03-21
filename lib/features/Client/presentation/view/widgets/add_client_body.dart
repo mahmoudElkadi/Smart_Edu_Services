@@ -155,9 +155,9 @@ class _AddNewClientViewBodyState extends State<AddNewClientViewBody> {
                         backGroundColor: Colors.blue,
                         widget: ClientCubit.get(context).isLoading == false
                             ? Text(
-                                "Edit",
+                                "Add Client",
                                 style: appStyle(
-                                    context, 16, Colors.white, FontWeight.bold),
+                                    context, 18, Colors.white, FontWeight.bold),
                               )
                             : const CircularProgressIndicator(
                                 color: Colors.white,

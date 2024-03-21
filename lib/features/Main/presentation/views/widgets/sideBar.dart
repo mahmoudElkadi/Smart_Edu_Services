@@ -94,8 +94,8 @@ class _ExampleSidebarXState extends State<ExampleSidebarX> {
                     Navigator.of(context).pop();
                   }),
               SidebarXItem(
-                  icon: FontAwesomeIcons.userGroup,
-                  label: 'Account',
+                  icon: FontAwesomeIcons.bank,
+                  label: 'Bank',
                   onTap: () {
                     Navigator.of(context).pop();
                   }),

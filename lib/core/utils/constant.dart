@@ -9,6 +9,8 @@ import '../../features/Currency/data/model/currency_model.dart';
 import '../../features/Users/data/models/user_model.dart';
 import '../../features/freelancer/data/model/freelancer_model.dart';
 
+late final GlobalKey<FormState> formAddBank = GlobalKey<FormState>();
+
 List<List> status = [
   ["On Going", "34", HexColor("#4791FF"), Icons.task],
   ["Delivered", "34", HexColor("#4791FF"), Icons.task],

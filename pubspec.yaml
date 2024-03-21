@@ -63,6 +63,10 @@ dependencies:
   firebase_messaging: ^14.6.3
   firebase_core: ^2.13.0
   fluttertoast: ^8.2.2
+  animated_text_kit: ^4.2.2
+  carousel_slider: ^4.2.1
+
+
 
 dev_dependencies:
   flutter_test:

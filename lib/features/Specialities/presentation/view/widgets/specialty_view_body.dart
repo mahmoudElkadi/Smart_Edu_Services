@@ -23,23 +23,27 @@ class SpecialtyViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "System Specialities",
-              style:
-                  appStyle(context, 20, Colors.grey.shade700, FontWeight.bold),
-            ),
-            const HeightSpacer(20),
-            Align(
-              alignment: Alignment.centerRight,
-              child: CustomIconButton(
-                onTap: () {
-                  openDialog(context);
-                },
-                color: Colors.white,
-                backGroundColor: HexColor("#00E38C"),
-                width: MediaQuery.of(context).size.width > 600 ? 250.w : 222.w,
-                text: 'Add New Speciality',
-              ),
+            Row(
+              children: [
+                Text(
+                  "System Specialities",
+                  style: appStyle(
+                      context, 18, Colors.grey.shade700, FontWeight.bold),
+                ),
+                const SizedBox(width: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: CustomIconButton(
+                    onTap: () {
+                      openDialog(context);
+                    },
+                    color: Colors.white,
+                    backGroundColor: HexColor("#00E38C"),
+                    text: 'Add New Speciality',
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
             const HeightSpacer(30),
             const SpecialityTableScreen(),

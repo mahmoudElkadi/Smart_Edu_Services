@@ -23,6 +23,8 @@ class TasksError extends TaskState {
 
 class ViewChange extends TaskState {}
 
+class ChangeValue extends TaskState {}
+
 class GetTaskLoading extends TaskState {}
 
 class LoadMore extends TaskState {}

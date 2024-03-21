@@ -14,4 +14,5 @@ class Config {
   static const String clientUrl = '/api/client';
   static const String userUrl = '/api/user';
   static const String noteUrl = '/api/note';
+  static const String bankUrl = '/api/bank';
 }

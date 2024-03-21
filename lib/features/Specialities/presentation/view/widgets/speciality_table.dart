@@ -47,6 +47,7 @@ class SpecialityTableScreen extends StatelessWidget {
                             dataRowMaxHeight: 80,
                             dataRowMinHeight: 50,
                             columnSpacing: 50,
+                            showCheckboxColumn: false,
                             headingRowColor: MaterialStateColor.resolveWith(
                                 (states) => Colors.grey.shade100),
                             columns: <DataColumn>[
@@ -79,7 +80,7 @@ class SpecialityTableScreen extends StatelessWidget {
                               )),
                             ],
                             rows: List.generate(
-                                speciality!.specialities.length,
+                                speciality.specialities.length,
                                 (index) => DataRow(
                                         cells: <DataCell>[
                                           DataCell(Align(

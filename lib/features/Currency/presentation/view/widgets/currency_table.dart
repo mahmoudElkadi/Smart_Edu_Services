@@ -36,6 +36,7 @@ class CurrencyTableScreen extends StatelessWidget {
                             dataRowMaxHeight: 80,
                             dataRowMinHeight: 50,
                             columnSpacing: 50,
+                            showCheckboxColumn: false,
                             headingRowColor: MaterialStateColor.resolveWith(
                                 (states) => Colors.grey.shade100),
                             columns: <DataColumn>[

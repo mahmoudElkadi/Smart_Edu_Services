@@ -20,23 +20,28 @@ class StatusViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "System Currencies",
-              style:
-                  appStyle(context, 20, Colors.grey.shade700, FontWeight.bold),
-            ),
-            const HeightSpacer(20),
-            Align(
-              alignment: Alignment.centerRight,
-              child: CustomIconButton(
-                onTap: () {
-                  openStatusDialog(context);
-                },
-                color: Colors.white,
-                backGroundColor: HexColor("#00E38C"),
-                width: MediaQuery.of(context).size.width > 600 ? 240.w : 220.w,
-                text: 'Add New Status',
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "System Currencies",
+                  style: appStyle(
+                      context, 20, Colors.grey.shade700, FontWeight.bold),
+                ),
+                const SizedBox(width: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: CustomIconButton(
+                    onTap: () {
+                      openStatusDialog(context);
+                    },
+                    color: Colors.white,
+                    backGroundColor: HexColor("#00E38C"),
+                    fontSize: 16,
+                    text: 'Add New Status',
+                  ),
+                ),
+              ],
             ),
             const HeightSpacer(30),
             const StatusTableScreen(),

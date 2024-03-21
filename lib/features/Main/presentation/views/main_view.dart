@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:smart/core/utils/app_style.dart';
 import 'package:smart/features/Client/presentation/view/client_view.dart';
@@ -11,7 +12,6 @@ import 'package:smart/features/Task/presenatation/view/widgets/filter_task_table
 
 import '../../../../core/Network/shared.dart';
 import '../../../../core/utils/constant.dart';
-import '../../../Account/presentation/view/account_View.dart';
 import '../../../Country/presentation/view/country_view.dart';
 import '../../../Currency/presentation/view/currencyView.dart';
 import '../../../Home/presentation/view/home_view.dart';
@@ -22,6 +22,7 @@ import '../../../Specialities/presentation/view/specialities_view.dart';
 import '../../../Statuses/presentation/view/widgets/status_view_body.dart';
 import '../../../Transactions/presentation/view/transaction_view.dart';
 import '../../../Users/presentation/view/users_view.dart';
+import '../../../bank/presentation/view/bankagator.dart';
 import '../../../freelancer/presentation/view/freelancer_view.dart';
 
 class MainView extends StatefulWidget {
@@ -59,7 +60,7 @@ class _MainViewState extends State<MainView> {
             key: _key,
             appBar: isSmallScreen
                 ? AppBar(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: HexColor("#3b82f6"),
                     leading: IconButton(
                       onPressed: () {
                         if (_key.currentState!.isEndDrawerOpen) {
@@ -135,7 +136,7 @@ class _MainViewState extends State<MainView> {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});
                               });
-                              return const AccountView();
+                              return const Bank();
                             case 5:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 setState(() {});

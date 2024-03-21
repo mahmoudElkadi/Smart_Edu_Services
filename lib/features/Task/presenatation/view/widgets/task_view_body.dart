@@ -58,7 +58,7 @@ class _TaskViewBodyState extends State<TaskViewBody> {
             TaskCubit.get(context).state is TasksLoading; // Check loading state
         final hasError = TaskCubit.get(context).state is TasksError;
 
-        if (isLoading && tasks == null) {
+        if (isLoading || tasks == null) {
           return const Center(child: CircularProgressIndicator());
         } else if (hasError) {
           final error = (TaskCubit.get(context).state as TasksError).message;
@@ -114,12 +114,6 @@ class _TaskViewBodyState extends State<TaskViewBody> {
                         const NeverScrollableScrollPhysics(), // Enable scrolling
                     shrinkWrap: true, // Adjust based on your layout needs
                     itemBuilder: (context, index) {
-                      if (index == TaskCubit.get(context).tasks.length - 1 &&
-                          TaskCubit.get(context).isLoadMore) {
-                        return const Center(
-                            child:
-                                CircularProgressIndicator()); // Show loading indicator
-                      }
                       return TaskItem(
                         color: Colors.blue,
                         task: TaskCubit.get(context).tasks[index],
@@ -130,7 +124,14 @@ class _TaskViewBodyState extends State<TaskViewBody> {
                     itemCount: TaskCubit.get(context)
                         .tasks
                         .length, // Use Cubit's tasks
-                  )
+                  ),
+                  if (TaskCubit.get(context).isLoadMore)
+                    const Column(
+                      children: [
+                        HeightSpacer(10),
+                        Center(child: CircularProgressIndicator()),
+                      ],
+                    ) // Show loading indicator
                 ],
               ),
             ),
